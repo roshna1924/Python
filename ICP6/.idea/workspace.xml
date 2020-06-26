@@ -2,13 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0e84eab7-6dcc-45fd-968c-f46cd7dffac7" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Documentation/count.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Documentation/elbow.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Documentation/null.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Documentation/nullafter.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Documentation/nullbefore.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Source_Code/CC.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Source_Code/kmeans.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../ICP5/Source/Ques1.py" beforeDir="false" afterPath="$PROJECT_DIR$/../ICP5/Source/Ques1.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
