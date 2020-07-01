@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="0e84eab7-6dcc-45fd-968c-f46cd7dffac7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../ICP5/Source/Ques1.py" beforeDir="false" afterPath="$PROJECT_DIR$/../ICP5/Source/Ques1.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,7 +25,7 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../ICP7" />
   </component>
   <component name="RunManager" selected="Python.kmeans (1)">
     <configuration name="kmeans (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
@@ -115,21 +116,25 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="658" height="696" key="GridCell.Tab.0.bottom" timestamp="1593131990998">
+    <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1593453052946">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="658" height="696" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1593131990998" />
-    <state width="658" height="696" key="GridCell.Tab.0.center" timestamp="1593131990998">
+    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1593453052946" />
+    <state width="648" height="696" key="GridCell.Tab.0.bottom" timestamp="1593209756956">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="658" height="696" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1593131990998" />
-    <state width="658" height="696" key="GridCell.Tab.0.left" timestamp="1593131990997">
+    <state width="648" height="696" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1593209756956" />
+    <state width="648" height="696" key="GridCell.Tab.0.center" timestamp="1593209756955">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="658" height="696" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1593131990997" />
-    <state width="658" height="696" key="GridCell.Tab.0.right" timestamp="1593131990998">
+    <state width="648" height="696" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1593209756955" />
+    <state width="648" height="696" key="GridCell.Tab.0.left" timestamp="1593209756953">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="658" height="696" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1593131990998" />
+    <state width="648" height="696" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1593209756953" />
+    <state width="648" height="696" key="GridCell.Tab.0.right" timestamp="1593209756956">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="648" height="696" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1593209756956" />
   </component>
 </project>
