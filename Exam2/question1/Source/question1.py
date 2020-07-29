@@ -132,22 +132,3 @@ plt.xlabel('Epoch')
 plt.ylabel('Loss')
 plt.show()
 
-# 1.c) avoid over fitting by adding drop-out layer and using Early stop
-
-early_stopping = EarlyStopping(min_delta=0.001, mode='max', monitor='val_accuracy', patience=2)
-callback = [early_stopping]
-
-model.add(Dropout(0.5))
-model.add(Flatten())
-model.add(Dense(num_classes,activation='softmax'))
-model.compile(loss='categorical_crossentropy',optimizer=Adam(lr=0.005), metrics=['accuracy'])
-history = model.fit(X_train, y_train, validation_data=(X_val, y_val),epochs=10, batch_size=256, verbose=1, callbacks=callback)
-
-# Plot loss of the model.
-plt.plot(history.history['loss'])
-plt.plot(history.history['val_loss'])
-plt.title('model loss')
-plt.legend(['Training Loss', 'Validation Loss'])
-plt.xlabel('Epoch')
-plt.ylabel('Loss')
-plt.show()
