@@ -32,62 +32,50 @@ random.seed(123)
 train= pd.read_csv("D:/UMKC/Subjects/Python/Exam2/question1/train.tsv", sep="\t")
 test = pd.read_csv("D:/UMKC/Subjects/Python/Exam2/question1/test.tsv", sep="\t")
 
-print(train.head())
-print(test.head())
-train.shape
-
-
-def clean_sentences(df):
-    reviews = []
-
-    for sent in tqdm(df['Phrase']):
-        # remove html content
-        review_text = BeautifulSoup(sent).get_text()
-
-        # remove non-alphabetic characters
-        review_text = re.sub("[^a-zA-Z]", " ", review_text)
-
-        # tokenize the sentences
-        words = word_tokenize(review_text.lower())
-
-        # lemmatize each word to its lemma
-        lemma_words = [lemmatizer.lemmatize(i) for i in words]
-
-        reviews.append(lemma_words)
-
-    return (reviews)
-
-
-# cleaned reviews for both train and test set retrieved
-train_sentences = clean_sentences(train)
-test_sentences = clean_sentences(test)
-print('train_sentences length:', len(train_sentences))
-print('test_sentences length:', len(test_sentences))
-
 target=train.Sentiment.values
 y_target=to_categorical(target)
 print('y_target:', y_target)
 num_classes=y_target.shape[1]
 print('num_classes:', num_classes)
 
+columns_of_interest = ['PhraseId', 'SentenceId', 'Phrase']
+train = train[columns_of_interest]
+print(train.head(),'\n', test.head())
+
+def clean_sentences(df):
+    reviews = []
+    for sent in tqdm(df['Phrase']):
+        # remove html content
+        review_text = BeautifulSoup(sent).get_text()
+        # remove non-alphabetic characters
+        review_text = re.sub("[^a-zA-Z]", " ", review_text)
+        # tokenize the sentences
+        words = word_tokenize(review_text.lower())
+        # lemmatize each word to its lemma
+        lemma_words = [lemmatizer.lemmatize(i) for i in words]
+        reviews.append(lemma_words)
+    return (reviews)
+
+# cleaned reviews for both train and test set retrieved
+train_sentences = clean_sentences(train)
+test_sentences = clean_sentences(test)
+print('\n train_sentences length:', len(train_sentences))
+print('test_sentences length:', len(test_sentences))
 
 X_train,X_val,y_train,y_val=train_test_split(train_sentences,y_target,test_size=0.2,stratify=y_target)
 
 # It is needed for initializing tokenizer of keras and subsequent padding
-
 unique_words = set()
 len_max = 0
 
 for sent in tqdm(X_train):
-
     unique_words.update(sent)
-
     if (len_max < len(sent)):
         len_max = len(sent)
 
 # length of the list of unique_words gives the no of unique words
-print('length of unique words:', len(list(unique_words)))
-print('Max length:', len_max)
+print('\n length of unique words:', len(list(unique_words)))
+print('\n Max length:', len_max)
 
 tokenizer = Tokenizer(num_words=len(list(unique_words)))
 tokenizer.fit_on_texts(list(X_train))
@@ -96,11 +84,10 @@ X_val = tokenizer.texts_to_sequences(X_val)
 X_test = tokenizer.texts_to_sequences(test_sentences)
 
 # padding done to equalize the lengths of all input reviews. CNN networks needs all inputs to be same length.
-# Therefore reviews lesser than max length will be made equal using extra zeros at end. This is padding.
 X_train = sequence.pad_sequences(X_train, maxlen=len_max)
 X_val = sequence.pad_sequences(X_val, maxlen=len_max)
 X_test = sequence.pad_sequences(X_test, maxlen=len_max)
-print('All Shapes', X_train.shape,X_val.shape,X_test.shape)
+print('\n All Shapes', X_train.shape,X_val.shape,X_test.shape)
 
 # 1.a) Using CNN model and adding embedding layer
 
@@ -119,8 +106,10 @@ model.compile(loss='categorical_crossentropy', optimizer=Adam(lr=0.005), metrics
 model.summary()
 
 history = model.fit(X_train, y_train, validation_data=(X_val, y_val),epochs=10, batch_size=256, verbose=1)
-test_loss, test_acc = model.evaluate(X_val, y_val)
-print(' After embedding test accuracy: ', test_acc)
+val_loss, val_acc = model.evaluate(X_val, y_val)
+print('\n After embedding (validation) accuracy: ', val_acc)
+test_prediction = model.predict(X_test)
+print('\n After embedding test prediction:\n', test_prediction)
 
 # 1.b) Plot loss of the model.
 
@@ -132,3 +121,22 @@ plt.xlabel('Epoch')
 plt.ylabel('Loss')
 plt.show()
 
+# 1.c) avoid over fitting by adding drop-out layer and using Early stop
+
+early_stopping = EarlyStopping(min_delta=0.001, mode='max', monitor='val_accuracy', patience=2)
+earlyStp = [early_stopping]
+
+model.add(Dropout(0.5))
+model.add(Flatten())
+model.add(Dense(num_classes,activation='softmax'))
+model.compile(loss='categorical_crossentropy',optimizer=Adam(lr=0.005), metrics=['accuracy'])
+history = model.fit(X_train, y_train, validation_data=(X_val, y_val),epochs=10, batch_size=256, verbose=1, callbacks=earlyStp)
+
+# Plot loss of the model.
+plt.plot(history.history['loss'])
+plt.plot(history.history['val_loss'])
+plt.title('model loss')
+plt.legend(['Training Loss', 'Validation Loss'])
+plt.xlabel('Epoch')
+plt.ylabel('Loss')
+plt.show()
